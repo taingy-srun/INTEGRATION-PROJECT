@@ -13,7 +13,7 @@ import java.util.TimerTask;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MainNetworkDataServiceApplication implements CommandLineRunner {
+public class MainNetworkDataServiceApplication /*implements CommandLineRunner*/ {
     @Autowired
     NetworkDataService networkDataService;
 
@@ -21,7 +21,7 @@ public class MainNetworkDataServiceApplication implements CommandLineRunner {
         SpringApplication.run(MainNetworkDataServiceApplication.class, args);
     }
 
-    @Override
+    /*@Override
     public void run(String... args) throws Exception {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -40,6 +40,6 @@ public class MainNetworkDataServiceApplication implements CommandLineRunner {
                 if(data != null) networkDataService.sendData(data);
             }
         }, 0, 1000);
-    }
+    }*/
 
 }

@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MainDiskDataServiceApplication implements CommandLineRunner {
+public class MainDiskDataServiceApplication /*implements CommandLineRunner*/ {
     @Autowired
     DiskService diskService;
 
@@ -22,7 +22,7 @@ public class MainDiskDataServiceApplication implements CommandLineRunner {
         SpringApplication.run(MainDiskDataServiceApplication.class, args);
     }
 
-    @Override
+    /*@Override
     public void run(String... args) throws Exception {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -34,7 +34,7 @@ public class MainDiskDataServiceApplication implements CommandLineRunner {
                 if(data != null) diskService.sendData(data);
             }
         }, 0, 1000);
-    }
+    }*/
 
 
 
