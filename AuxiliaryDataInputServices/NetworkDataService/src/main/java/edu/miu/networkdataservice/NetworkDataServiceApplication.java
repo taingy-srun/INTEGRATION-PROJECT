@@ -30,10 +30,16 @@ public class NetworkDataServiceApplication implements CommandLineRunner {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //String apiUrl = "http://localhost:19999/api/v1/data?chart=system.ipv4"; For MacOS
-                String apiUrl = "http://localhost:19999/api/v1/data?chart=system.ip"; // For Windows
+                //String apiUrl = "http://localhost:19999/api/v1/data?chart=system.ipv4"; // For MacOS
+                //String apiUrl = "http://localhost:19999/api/v1/data?chart=system.ip"; // For Windows
+
+                String apiUrl = "http://localhost:19999/api/v1/data";
+                String osType = System.getProperty("os.name");
+                apiUrl += (osType == "Windows") ?  "?chart=system.in" : "?chart=system.ipv4";
                 apiUrl += "&after=-2&format=json&points=1";
+
                 Metric data = networkDataService.getData(apiUrl);
+                //System.out.println("Fetched data is: " + data);
                 if(data != null) networkDataService.sendData(data);
             }
         }, 0, 1000);
