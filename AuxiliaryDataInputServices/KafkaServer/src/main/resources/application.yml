@@ -10,7 +10,8 @@ eureka:
 
 spring:
   kafka:
-    bootstrap-servers: http://localhost:9092 #it's work for local kafka setup
+    #it's work for local kafka setup
+    bootstrap-servers: http://localhost:9092
     consumer:
       properties:
         spring.json.trusted.packages: "*"
