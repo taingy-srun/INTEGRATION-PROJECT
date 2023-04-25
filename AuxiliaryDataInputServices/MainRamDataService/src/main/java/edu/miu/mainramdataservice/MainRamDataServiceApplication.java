@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MainRamDataServiceApplication implements CommandLineRunner {
+public class MainRamDataServiceApplication /*implements CommandLineRunner*/ {
     @Autowired
     RamDataService ramDataService;
 
@@ -22,7 +22,7 @@ public class MainRamDataServiceApplication implements CommandLineRunner {
         SpringApplication.run(MainRamDataServiceApplication.class, args);
     }
 
-    @Override
+/*    @Override
     public void run(String... args) throws Exception {
 
 
@@ -36,5 +36,5 @@ public class MainRamDataServiceApplication implements CommandLineRunner {
                 if(data != null) ramDataService.sendData(data);
             }
         }, 0, 1000);
-    }
+    }*/
 }
