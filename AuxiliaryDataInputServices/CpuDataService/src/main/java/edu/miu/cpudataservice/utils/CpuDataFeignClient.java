@@ -13,6 +13,7 @@ public interface CpuDataFeignClient {
     String sendRemoteData(@RequestBody Metric metric);
 
     default String saveDataLocally(Metric metric, Throwable throwable) {
+        System.out.println(throwable.getStackTrace());
         return "Data cannot be sent remotely because of an exception!";
     }
 }

@@ -15,14 +15,14 @@ import java.util.TimerTask;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MainCpuDataServiceApplication /*implements CommandLineRunner*/ {
+public class MainCpuDataServiceApplication implements CommandLineRunner {
     @Autowired
     IMetricService cpuServices;
 
     public static void main(String[] args) {
         SpringApplication.run(MainCpuDataServiceApplication.class, args);
     }
-/*    @Override
+    @Override
     public void run(String... args) throws Exception {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -35,6 +35,6 @@ public class MainCpuDataServiceApplication /*implements CommandLineRunner*/ {
             }
         }, 0, 2000);
 
-    }*/
+    }
 
 }
