@@ -13,14 +13,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/cpu-data")
 @CrossOrigin
-public class CpuDataConsumerController {
+public class CpuDataConsumerController implements IDataConsumerController {
     Map<Long, CpuData> latestCpuData = new HashMap<>();
-    Map<Long, Computer> latestComputers = new HashMap<>();
+    //Map<Long, Computer> latestComputers = new HashMap<>();
 
     @KafkaListener(topics = "${kafka.topics.cpu-data}", groupId = "cpu-data-consumer-group", containerFactory = "cpuDataKafkaListenerContainerFactory")
     public void receiveCpuData(CpuData data) {
         latestCpuData.put(data.getComputer().getId(), data);
-        latestComputers.put(data.getComputer().getId(), data.getComputer());
+        //latestComputers.put(data.getComputer().getId(), data.getComputer());
+        addComputer(data);
         System.out.println("Cpu Data received from Kafka");
     }
 
@@ -31,6 +32,7 @@ public class CpuDataConsumerController {
     }
 
     @GetMapping("/get-current-computers")
+    @Override
     public List<Computer> getComputers() {
         return latestComputers.values().stream().toList();
     }
