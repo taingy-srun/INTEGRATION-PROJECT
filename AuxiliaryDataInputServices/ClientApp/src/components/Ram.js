@@ -21,6 +21,7 @@ const addNewRamData = (ramData) => {
 const Ram = ({computerID}) => {
   const [labels, setLabels] = useState([]);
   const [data, setData] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
 
   const fetchData = async () => {
     const response = await fetch('http://localhost:8081/api/ram-data/' + computerID + '/get-current-data');
@@ -36,6 +37,7 @@ const Ram = ({computerID}) => {
     dataFromApi[dataFromApi.length] = jsonData.purgeable;
     dataFromApi[dataFromApi.length] = jsonData.speculative;
     dataFromApi[dataFromApi.length] = jsonData.free;
+    setCurrentData(jsonData);
     addNewRamData(dataFromApi);
 
     setData(ramDataFromApi);
@@ -86,6 +88,11 @@ const Ram = ({computerID}) => {
   return (
     <div>
       <h1>RAM USAGE</h1>
+      <marquee>
+        <p>
+          Last update:  {`Active: ${currentData.active}, Wired: ${currentData.wired}, Throttled: ${currentData.throttled}, Compressor: ${currentData.compressor}, Inactive: ${currentData.inactive}, Purgeable: ${currentData.purgeable}, Speculative: ${currentData.speculative}, Free: ${currentData.free}`}
+        </p>
+      </marquee>
       <Line data={chartData} options={options} />
     </div>
   );

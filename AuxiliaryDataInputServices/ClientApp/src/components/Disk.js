@@ -19,6 +19,8 @@ const addNewDiskData = (diskData) => {
 const Disk = ({computerID}) => {
   const [labels, setLabels] = useState([]);
   const [data, setData] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
+
 
   const fetchData = async () => {
     const response = await fetch('http://localhost:8081/api/disk-data/' + computerID + '/get-current-data');
@@ -27,7 +29,7 @@ const Disk = ({computerID}) => {
     dataFromApi[dataFromApi.length] = jsonData.time;
     dataFromApi[dataFromApi.length] = jsonData.in;
     dataFromApi[dataFromApi.length] = jsonData.out;
-    
+    setCurrentData(jsonData);
     addNewDiskData(dataFromApi);
      setData(diskDataFromApi);
     setLabels(['time', 'in', 'out']);
@@ -74,6 +76,11 @@ const Disk = ({computerID}) => {
   return (
     <div>
       <h1>DISK USAGE</h1>
+      <marquee>
+        <p>
+          Last update:  {`In: ${currentData.in}, Out: ${currentData.out}`}
+        </p>
+      </marquee>
       <Line data={chartData} options={options} />
     </div>
   );
